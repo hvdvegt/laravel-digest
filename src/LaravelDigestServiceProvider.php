@@ -27,7 +27,9 @@ class LaravelDigestServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'laravel-digest-migrations');
 
-        $this->scheduleDigestCommands();
+        if (config('laravel-digest.enable-scheduler')) {
+            $this->scheduleDigestCommands();
+        }
     }
 
     public function register(): void
